@@ -1,0 +1,22 @@
+fullstack using java
+
+mysql database
+springboot framework
+-create apis and interaction of database and framework.create thread applications/thread apis.
+-jpa/jpi hypernet
+-currentpostman 3rd party tool to test backend
+
+html,css,bootstrap,javascript
+react js library
+
+need topics:
+restful api and json api,angular
+is mern included?
+
+
+-no 2 or more objects data in one table
+
+web services-data excahnge - app to app or web application to web appication interaction - json - common platform - web service is for data exchange 
+api - part of web services - converts one format to json format
+rest-api is built using springboot framework
+frontend with react js
