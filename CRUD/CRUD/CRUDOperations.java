@@ -1,3 +1,4 @@
+package CRUD;
 import java.sql.*;
 
 public class CRUDOperations {
@@ -15,16 +16,16 @@ public class CRUDOperations {
             System.out.println("✅ Connected to Database Successfully!");
 
             // 3️⃣ Insert a User
-            insertUser(conn, "john_doe", "password123", "John Doe", "john@example.com");
+            insertUser(conn, "bill", "1234", "Bill Gates", "bill.gates@microsoft.com");
 
             // 4️⃣ Fetch All Users
             fetchUsers(conn);
 
             // 5️⃣ Update a User
-            updateUser(conn, "john_doe", "newpassword", "Johnathan Doe", "john.doe@example.com");
+            updateUser(conn, "bill", "123456789", "William Henry Bill Gates", "bill.gates@microsoft.com");
 
             // 6️⃣ Delete a User
-            deleteUser(conn, "john_doe");
+            deleteUser(conn, "bill");
 
             // 7️⃣ Close Connection
             conn.close();
