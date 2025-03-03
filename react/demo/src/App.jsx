@@ -1,19 +1,28 @@
 //functional component
 //entitlement,roles,tokens
 //jsx - javascript xml
-import "react";
-import Home from "./pages/Home";
-import Header from "./components/layout/Header/Header";
-import Footer from "./components/layout/Footer/Footer";
+
+import { BrowserRouter, Routes, Route } from "react-router";
+import Home from './pages/Home';
+import About from './pages/About';
+import Services from './pages/Services';
+import Contact from './pages/Contact';
+import AppLayout from "./components/layout/AppLayout/AppLayout";
 
 const App = () => {
   return (
-    <>
-    <Header />
-    <Home />
-    <Footer/>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/*" element={<AppLayout />}>
+          <Route index element={<Home />} />
+          <Route path="home" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="services" element={<Services />} />
+          <Route path="contact" element={<Contact />} />
+        </Route>
+        
+      </Routes>
+    </BrowserRouter>
   );
-};
-
+}
 export default App;

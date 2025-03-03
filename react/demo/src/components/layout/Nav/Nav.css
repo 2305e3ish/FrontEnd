@@ -3,23 +3,24 @@
     justify-content: center;
     background-color: #333;
     padding: 10px 0;
-  }
-  
-  .nav ul {
+    width: 100%; /* Ensure the nav takes the full width */
+}
+
+.nav ul {
     list-style: none;
     display: flex;
     gap: 20px;
-  }
-  
-  .nav ul li {
+}
+
+.nav ul li {
     margin: 0;
-  }
-  
-  .nav ul li a {
+}
+
+.nav ul li a {
     color: #fff;
     text-decoration: none;
-  }
-  
-  .nav ul li a:hover {
+}
+
+.nav ul li a:hover {
     text-decoration: underline;
-  }
+}

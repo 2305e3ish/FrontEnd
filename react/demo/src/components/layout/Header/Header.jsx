@@ -3,7 +3,6 @@ import 'react';
 import './Header.css'; 
 import Nav from '../Nav/Nav';
 import reactLogo from '../../../assets/react.svg';
-
 const Header = () => {
   return (
     <header className="header">
