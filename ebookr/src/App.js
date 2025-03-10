@@ -8,6 +8,7 @@ import Catalog from './components/Catalog';
 import Cart from './components/Cart';
 import Register from './components/Register';
 import Login from './components/Login';
+import Weather from './components/Weather';
 import './components/styles.css';
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
                             <Route path="/cart" element={<Cart />} />
                             <Route path="/register" element={<Register />} />
                             <Route path="/login" element={<Login />} />
+                            <Route path="/Weather" element={<Weather />} />
                         </Routes>
                     </div>
                 </div>
