@@ -8,3 +8,9 @@
     background-color: #140606;
     font-family: 'Roboto', sans-serif;
 }
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+}
