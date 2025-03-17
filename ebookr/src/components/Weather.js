@@ -4,62 +4,59 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Weather = () => {
     const apiKey = '751e91b5732623498767717c10c1840c';
-    const [city, setCity] = useState(''); // Store city name input by user
+    const [city, setCity] = useState('');
     const [weatherData, setWeatherData] = useState(null);
     const [forecastData, setForecastData] = useState(null);
-    const [loading, setLoading] = useState(false); // Track loading state
-    const [submitClicked, setSubmitClicked] = useState(false); // Flag to check if button is clicked
-
-    // Variable to store chart instance using useRef
+    const [loading, setLoading] = useState(false);
+    const [submitClicked, setSubmitClicked] = useState(false);
     const chartInstanceRef = useRef(null);
 
     const handleCityChange = (event) => {
-        setCity(event.target.value); // Update city as user types
+        setCity(event.target.value);
     };
 
     const handleCitySubmit = (event) => {
         event.preventDefault();
         if (city.trim()) {
-            setLoading(true); // Set loading to true when fetching data
-            setSubmitClicked(true); // Indicate that the button has been clicked
-            setWeatherData(null); // Clear previous weather data
-            setForecastData(null); // Clear previous forecast data
+            setLoading(true);
+            setSubmitClicked(true);
+            setWeatherData(null);
+            setForecastData(null);
         }
     };
 
-    // Fetch weather data when the submit button is clicked
     useEffect(() => {
-        if (!submitClicked || !city) return; // Don't fetch if button is not clicked or city is empty
+        if (!submitClicked || !city) return;
 
-        // Fetch current weather data
+        setSubmitClicked(false);
+
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
             .then((response) => response.json())
             .then((data) => {
                 if (data && data.main && data.weather) {
-                    setWeatherData(data); // Store weather data
+                    setWeatherData(data);
                 } else {
                     console.error('Error: Invalid weather data');
                 }
-                setLoading(false); // Stop loading after data is fetched
+                setLoading(false);
             })
             .catch((error) => {
                 console.error('Error fetching weather data:', error);
-                setLoading(false); // Stop loading in case of an error
+                setLoading(false);
             });
 
-        // Fetch forecast data for the next few hours
         fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`)
             .then((response) => response.json())
             .then((data) => setForecastData(data))
             .catch((error) => console.error('Error fetching forecast data:', error));
-    }, [submitClicked, city, apiKey]);
+
+    }, [submitClicked,city]);
 
     useEffect(() => {
         if (forecastData && forecastData.list) {
             const labels = [];
             const temperatures = [];
 
-            // Get 6-hourly temperature forecast
             for (let i = 0; i < 6; i++) {
                 const entry = forecastData.list[i];
                 if (entry && entry.main && entry.main.temp) {
@@ -69,12 +66,10 @@ const Weather = () => {
                 }
             }
 
-            // Destroy the existing chart if it exists
             if (chartInstanceRef.current) {
                 chartInstanceRef.current.destroy();
             }
 
-            // Create the new chart
             const ctx = document.getElementById('weatherChart').getContext('2d');
             chartInstanceRef.current = new Chart(ctx, {
                 type: 'line',
@@ -99,7 +94,6 @@ const Weather = () => {
             });
         }
 
-        // Cleanup on component unmount or when forecastData changes
         return () => {
             if (chartInstanceRef.current) {
                 chartInstanceRef.current.destroy();
@@ -111,7 +105,6 @@ const Weather = () => {
         <div className="content-wrapper">
             <h1>Weather API</h1>
 
-            {/* City input form */}
             <div className="weather-container">
                 <form onSubmit={handleCitySubmit}>
                     <input
@@ -125,10 +118,8 @@ const Weather = () => {
                 </form>
             </div>
 
-            {/* Loading state */}
             {loading && <p>Loading weather data...</p>}
 
-            {/* Weather information */}
             {weatherData && !loading ? (
                 <div className="weather-info">
                     <h6>Temperature: {weatherData.main.temp}°C</h6>
@@ -140,7 +131,6 @@ const Weather = () => {
                 </div>
             ) : null}
 
-            {/* Forecast chart */}
             {forecastData && !loading ? (
                 <div className="chart-container">
                     <canvas id="weatherChart"></canvas>
